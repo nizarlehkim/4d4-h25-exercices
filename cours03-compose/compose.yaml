@@ -23,6 +23,7 @@
 
 volumes:
  ubuntu_data:
+ mysql_data:
 
 services:
   ubuntu-1:
@@ -39,9 +40,19 @@ services:
      # - <volume-id>:<container-path>
      - ubuntu_data:/etc
 
-  ubuntu-2:
-    image: ubuntu:20.04
-    command: tail -f /dev/null
-    ports:
-     - 7777:1234          
-     - 1234:1234 
+  # ubuntu-2:
+  #   image: ubuntu:20.04
+  #   command: tail -f /dev/null
+  #   ports:
+  #    - 7777:1234          
+  #    - 1234:1234 
+  bd-mysql:
+   image: mysql
+   environment:
+   - MYSQL_ROOT_PASSWORD=123
+   ports:
+     - 8336:3306
+   volumes:
+    - mysql_data:/var/lib/mysql
+    
+
