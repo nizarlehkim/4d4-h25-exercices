@@ -1,0 +1,17 @@
+
+services:
+  web:
+    image: nginx:1-alpine
+    ports:
+      - 12345:80
+    volumes:
+      - ./nginx/nginx-docker-compose:/usr/share/nginx/html
+  bd-mysql-root:
+    image: mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=bonjour
+    ports:
+      - 4444:3306
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      
